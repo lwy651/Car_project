@@ -17,4 +17,12 @@ router.get('/', function(req, res, next) {
   //res.send("cardb");
 });
 
+router.get('/login',function(req,res){
+  res.render('login');
+});
+router.post('/login',function(req,res){
+  console.log(req.body);
+});
+
+
 module.exports = router;
