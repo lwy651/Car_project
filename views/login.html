@@ -6,14 +6,27 @@
 	<meta name="description" content="Login">
   <meta name="author" content="Webdesigntuts+">
 	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-	<form id="slick-login" onsubmit="return false">
+	<form Method='POST' id="slick-login">
         <label for="username">username</label>
         <input type="text" name="username" class="placeholder" placeholder="用户名">
         <label for="password">password</label>
         <input type="password" name="password" class="placeholder" placeholder="密码">
         <input type="submit" value="登录">
     </form>
+		<!-- <script>
+			function login(){
+				var username = $('#username').val();
+				var password = $('#password').val();
+				var data = {"username":username,"password":password};
+				$.ajax({
+					url:'/login',
+					type:'POST',
+					data:data
+				});
+			}
+		</script> -->
 </body>
 </html>

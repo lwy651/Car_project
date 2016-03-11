@@ -15,7 +15,12 @@ var wheelSchema = new mongoose.Schema({
   name   :{type:String},
   model  :{type:String}
 });
+var userSchema = new mongoose.Schema({
+  username:{type:String},
+  password:{type:String}
+});
 
 exports.CarLights = db.model('carlights',mongooseSchema);
-exports.Wheel = db.model('wheel',mongooseSchema);
+exports.Wheel = db.model('wheel',wheelSchema);
+exports.User = db.model('caruser',userSchema);
 exports.db = db;
