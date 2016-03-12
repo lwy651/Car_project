@@ -4,11 +4,14 @@ var car = require('../controller/mongodb_connect');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index',{title:'主页'});
   //res.send("cardb");
 });
 
 router.get('/login',function(req,res){
+  if(req.session){
+    console.log(req.session.username+"...........");
+  }
   res.render('login');
 });
 router.post('/login',function(req,res){
@@ -24,6 +27,8 @@ router.post('/login',function(req,res){
       res.render('login');
     }else {
       if(req.body.password == doc.password){
+        req.session.username = doc.username;
+        req.session.save();
         res.redirect("main");
       }
       else {
