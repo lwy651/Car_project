@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var car = require('../controller/mongodb_connect');
+var car = require('../models/mongodb_connect');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -9,13 +9,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login',function(req,res){
-  if(req.session){
-    console.log(req.session.username+"...........");
-  }
+    if(req.cookies["account"]!=null)
+    {
+      console.log(req.cookies);
+      console.log(req.account);
+      console.log(req.cookies.account.a);
+      res.redirect("main");
+      return;
+    }
   res.render('login');
 });
 router.post('/login',function(req,res){
   var username = req.body.username;
+  console.log("aaaaaaaaaa");
   car.User.findOne({username:req.body.username},function(err,doc){
     if(err){
       res.send(err);
@@ -27,8 +33,8 @@ router.post('/login',function(req,res){
       res.render('login');
     }else {
       if(req.body.password == doc.password){
-        req.session.username = doc.username;
-        req.session.save();
+        res.cookie('account',{a:651},{maxAge:60000});
+        req.session.user = "aaaaaaaa";
         res.redirect("main");
       }
       else {

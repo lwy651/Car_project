@@ -32,14 +32,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 var options = {
   "host":"127.0.0.1",
   "port":"6379",
-  "ttl":60*60*24*30
+  "ttl":60
 };
 
 app.use(session({
   store: new RedisStore(options),
-  resave: true,
-  saveUninitialized: true,
-  secret: 'express is powerful'
+  secret:"keyboard cat",
+  resave:false,
+  saveUninitialized:true
 }));
 
 app.use('/', routes);
